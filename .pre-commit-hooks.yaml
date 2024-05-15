@@ -2,7 +2,7 @@
   name: astyle
   description: "Run 'astyle' for simple C/C++ formatting"
   entry: astyle.sh
-  language: python
+  language: script
   types_or: [c++, c, header]
   require_serial: true
   minimum_pre_commit_version: "2.9.2"
