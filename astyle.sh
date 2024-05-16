@@ -17,7 +17,7 @@ git diff --cached --name-status --diff-filter=ACMR |
 	while read STATUS FILE; do
 	if [[ "$FILE" =~ ^.+(c|cpp|h)$ ]]; then
 		$ASTYLE $OPTIONS $FILE
-		[ -f $FILE.orig]
+		[ -f $FILE.orig ]
 		if [ $? -ne 0 ]; then
 			echo "[!] $FILE does not respect the agreed coding standards." >&2
 			RETURN=1
