@@ -16,21 +16,15 @@ git diff --cached --name-status --diff-filter=ACMR |
 	# RETURN of the parent hasn't changed properly.
 	while read STATUS FILE; do
 	if [[ "$FILE" =~ ^.+(c|cpp|h)$ ]]; then
-		$ASTYLE $OPTIONS $FILE
-		[ -f $FILE.orig ]
-		if [ $? -ne 0 ]; then
+		$ASTYLE $OPTIONS $FILE | read RESULT
+		if [ -f $FILE.orig ]; then
 			echo "[!] $FILE does not respect the agreed coding standards." >&2
+			echo $RESULT
 			RETURN=1
 			rm $FILE.orig
 		fi
 	fi
 	done
-
-	if [ $RETURN -eq 1 ]; then
-		echo ""
-		echo "Make sure you have run astyle with the following options:" >&2
-		echo $OPTIONS >&2
-	fi
 
 	exit $RETURN
 }
